@@ -1,0 +1,11 @@
+SELECT  
+customer_id,
+SUM(quantity) AS orders_count,
+SUM(amount) AS orders_revenue,
+COUNT(DISTINCT customer_id) FILTER (WHERE order_type = 'paid') AS orders_paid_count,
+SUM(amount) FILTER (WHERE order_type = 'paid') AS orders_paid_revenue,
+AVG(amount) AS avg_bill,
+MAX(order_date) AS days_last_order,
+MIN(order_date) as first_paid_order_date
+FROM   alexandra_a.rfm_mart rm 
+GROUP BY customer_id 
